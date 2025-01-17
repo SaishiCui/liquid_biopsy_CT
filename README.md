@@ -4,7 +4,7 @@
 ## Overview
 This project is designed to [project purpose]. It involves a series of steps to achieve [project functionality].
 
-![Overview Image](/liquid_biopsy_CT/Images/WorkFlow.png)
+![Overview Image](/Images/WorkFlow.png)
 
 ## Table of Contents
 1. [Data Preparation](#data-preparation)
@@ -28,12 +28,12 @@ These scripts are used to prepare your data.
 ## Step A: Find DMP
 After data preparation, proceed with Step A using the `Find_DMP.py` script. This step involves identifying differentially methylated positions (DMPs).
 
-![Step A Image](/liquid_biopsy_CT/Images/Step_A.png)
+![Step A Image](/Images/Step_A.png)
 
 ## Step B: Calculate Correlation and Filtering
 Step B includes several sub-steps involving Spearman correlation calculation, linear model filtering, and gene list selection. The scripts involved are:
 
-![Step B Image](/liquid_biopsy_CT/Images/Step_B.png)
+![Step B Image](/Images/Step_B.png)
 
 - `Calulate_Spearman_correlation_CD4T_testing.py`
 - `Calulate_Spearman_correlation_CD4T_training.py`
@@ -50,7 +50,7 @@ These scripts are used for analysis and filtering.
 
 ## Step C: Build PBMC with Cancer Reactive Atlas
 In Step C, the `Build_PBMC_with_CancerReactive_Atlas.py` script is used to construct a PBMC with a cancer-reactive atlas.
-![Step C Image](/liquid_biopsy_CT/Images/Step_C.png)
+![Step C Image](/Images/Step_C.png)
 
 ## Step D: Deconvolution and Prediction Models
 Step D involves deconvolution and prediction models. The scripts available for this step are:
