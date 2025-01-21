@@ -30,8 +30,13 @@ After data preparation, proceed with Step A using the `Find_DMP.py` script. This
 
 ![Step A Image](/Images/Step_A.png)
 
-## Step B: Calculate Correlation and Filtering
-Step B includes several sub-steps involving Spearman correlation calculation, linear model filtering, and gene list selection. The scripts involved are:
+We also have Step A for data with Granulocytes.
+
+![Step A Image_Granu](/Images/Step_A_Granu.png)
+
+
+## Step B: Predict CD4+T/CD8+T cancer reactive signatures' DNA Methylation level
+Step B includes several sub-steps involving sliding window algorithm, Spearman correlation calculation, gene list selection, linear model filtering and extrapolation. The scripts involved are:
 
 ![Step B Image](/Images/Step_B.png)
 
@@ -46,11 +51,15 @@ Step B includes several sub-steps involving Spearman correlation calculation, li
 - `Sliding_Window_CD4T.py`
 - `Sliding_Window_CD8T.py`
 
-These scripts are used for analysis and filtering.
+These scripts are used for detecting, filtering, predicting and analysis.
 
 ## Step C: Build PBMC with Cancer Reactive Atlas
 In Step C, the `Build_PBMC_with_CancerReactive_Atlas.py` script is used to construct a PBMC with a cancer-reactive atlas.
+We also have 'Build_PBMC_with_CancerReactive_Atlas_withGranu.py' script for constructing another PBMC atlas with cancer reactive signatures as well as granulocytes.
+
 ![Step C Image](/Images/Step_C.png)
+![Step C Image_Granu](/Images/Step_C_Granu.png)
+
 
 ## Step D: Deconvolution and Prediction Models
 Step D involves deconvolution and prediction models. The scripts available for this step are:
