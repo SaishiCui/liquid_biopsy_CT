@@ -32,6 +32,11 @@ Notes:
 - There are two versions for saving the data:
     - CD8T_RNA_study2.csv: only include the 12 samples from Ventham et al., 2016.
     - CD8T_RNA_allsamples.csv: include all the 23 samples from three studies.
+<<<<<<< HEAD
+=======
+- Training data is using the 12 samples from Ventham et al., 2016.
+- Testing data is using the 11 samples from the other two studies.
+>>>>>>> bb3e26c (Initial commit)
 -------------------------------------------------------------------------------
 """
 

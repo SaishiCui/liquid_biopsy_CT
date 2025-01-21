@@ -15,7 +15,11 @@ from scipy.stats import linregress, spearmanr
 
 """
 --------------------------------------------------------------------------------
+<<<<<<< HEAD
 Date last modified: 2025-01-17 by Saishi Cui
+=======
+Date last modified: 2025-01-16 by Saishi Cui
+>>>>>>> bb3e26c (Initial commit)
 Program: DEgene_analysis_CD4TCR.py
 Purpose: Using external single-cell RNA-seq data of CD4+T and CD4+T cancer reactive samples,
 analyze the DE genes between CD4+T cancer reactive and non-cancer reactive CD4+T samples.
@@ -120,8 +124,13 @@ genes_label = BC_df["Unnamed: 0"].tolist()
 BC_df_transposed = BC_df.T
 BC_df_transposed = BC_df_transposed.drop(BC_df_transposed.index[0], axis=0)
 BC_df_transposed = BC_df_transposed.drop(BC_df_transposed.columns[0], axis=1)
+<<<<<<< HEAD
 BC_df_transposed.columns = genes_label[1:]  # 去掉第一个元素，因为它是列名
 BC_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  # 去掉第一个元素，因为它是行名
+=======
+BC_df_transposed.columns = genes_label[1:]  
+BC_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  
+>>>>>>> bb3e26c (Initial commit)
 BC_df_transposed.reset_index(drop=True, inplace=True)
 
 
@@ -152,8 +161,13 @@ genes_label = ESCA_df["Unnamed: 0"].tolist()
 ESCA_df_transposed = ESCA_df.T
 ESCA_df_transposed = ESCA_df_transposed.drop(ESCA_df_transposed.index[0], axis=0)
 ESCA_df_transposed = ESCA_df_transposed.drop(ESCA_df_transposed.columns[0], axis=1)
+<<<<<<< HEAD
 ESCA_df_transposed.columns = genes_label[1:]  # 去掉第一个元素，因为它是列名
 ESCA_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  # 去掉第一个元素，因为它是行名
+=======
+ESCA_df_transposed.columns = genes_label[1:]  
+ESCA_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  
+>>>>>>> bb3e26c (Initial commit)
 ESCA_df_transposed.reset_index(drop=True, inplace=True)
 
 
@@ -223,8 +237,13 @@ genes_label = PACA_df["Unnamed: 0"].tolist()
 PACA_df_transposed = PACA_df.T
 PACA_df_transposed = PACA_df_transposed.drop(PACA_df_transposed.index[0], axis=0)
 PACA_df_transposed = PACA_df_transposed.drop(PACA_df_transposed.columns[0], axis=1)
+<<<<<<< HEAD
 PACA_df_transposed.columns = genes_label[1:]  # 去掉第一个元素，因为它是列名
 PACA_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  # 去掉第一个元素，因为它是行名
+=======
+PACA_df_transposed.columns = genes_label[1:]  
+PACA_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  
+>>>>>>> bb3e26c (Initial commit)
 PACA_df_transposed.reset_index(drop=True, inplace=True)
 
 
@@ -253,8 +272,13 @@ genes_label = THCA_df["Unnamed: 0"].tolist()
 THCA_df_transposed = THCA_df.T
 THCA_df_transposed = THCA_df_transposed.drop(THCA_df_transposed.index[0], axis=0)
 THCA_df_transposed = THCA_df_transposed.drop(THCA_df_transposed.columns[0], axis=1)
+<<<<<<< HEAD
 THCA_df_transposed.columns = genes_label[1:]  # 去掉第一个元素，因为它是列名
 THCA_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  # 去掉第一个元素，因为它是行名
+=======
+THCA_df_transposed.columns = genes_label[1:]  
+THCA_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  
+>>>>>>> bb3e26c (Initial commit)
 THCA_df_transposed.reset_index(drop=True, inplace=True)
 
 
@@ -311,8 +335,13 @@ genes_label = UCEC_df["Unnamed: 0"].tolist()
 UCEC_df_transposed = UCEC_df.T
 UCEC_df_transposed = UCEC_df_transposed.drop(UCEC_df_transposed.index[0], axis=0)
 UCEC_df_transposed = UCEC_df_transposed.drop(UCEC_df_transposed.columns[0], axis=1)
+<<<<<<< HEAD
 UCEC_df_transposed.columns = genes_label[1:]  # 去掉第一个元素，因为它是列名
 UCEC_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  # 去掉第一个元素，因为它是行名
+=======
+UCEC_df_transposed.columns = genes_label[1:]  
+UCEC_df_transposed.insert(0, 'Cell_Label', cells_label[1:])  
+>>>>>>> bb3e26c (Initial commit)
 UCEC_df_transposed.reset_index(drop=True, inplace=True)
 
 
@@ -374,7 +403,13 @@ pseudobulk_sample23_CD4T = UCEC_scRNA_sample6_df[UCEC_scRNA_sample6_df['CD4_canc
 # Combine the pseudobulk data across all cancer types.
 
 intersected_genes = list(set(pseudobulk_sample1_CD4TCR.index) & set(pseudobulk_sample2_CD4TCR.index) & set(pseudobulk_sample3_CD4TCR.index) & set(pseudobulk_sample4_CD4TCR.index) & set(pseudobulk_sample5_CD4TCR.index) & set(pseudobulk_sample6_CD4TCR.index) & set(pseudobulk_sample7_CD4TCR.index) & set(pseudobulk_sample8_CD4TCR.index) & set(pseudobulk_sample9_CD4TCR.index) & set(pseudobulk_sample10_CD4TCR.index) & set(pseudobulk_sample11_CD4TCR.index) & set(pseudobulk_sample12_CD4TCR.index) & set(pseudobulk_sample13_CD4TCR.index) & set(pseudobulk_sample14_CD4TCR.index) & set(pseudobulk_sample15_CD4TCR.index) & set(pseudobulk_sample16_CD4TCR.index) & set(pseudobulk_sample17_CD4TCR.index) & set(pseudobulk_sample18_CD4TCR.index) & set(pseudobulk_sample19_CD4TCR.index) & set(pseudobulk_sample20_CD4TCR.index) & set(pseudobulk_sample21_CD4TCR.index) & set(pseudobulk_sample22_CD4TCR.index) & set(pseudobulk_sample23_CD4TCR.index))
+<<<<<<< HEAD
 pseudobulk_CD4TCR = pd.concat([pseudobulk_sample1_CD4TCR[intersected_genes], pseudobulk_sample2_CD4TCR[intersected_genes], pseudobulk_sample3_CD4TCR[intersected_genes], pseudobulk_sample4_CD4TCR[intersected_genes], pseudobulk_sample5_CD4TCR[intersected_genes], pseudobulk_sample6_CD4TCR[intersected_genes], pseudobulk_sample7_CD4TCR[intersected_genes], pseudobulk_sample8_CD4TCR[intersected_genes], pseudobulk_sample9_CD4TCR[intersected_genes], pseudobulk_sample10_CD4TCR[intersected_genes], pseudobulk_sample11_CD4TCR[intersected_genes], pseudobulk_sample12_CD4TCR[intersected_genes], pseudobulk_sample13_CD4TCR[intersected_genes], pseudobulk_sample14_CD4TCR[intersected_genes], pseudobulk_sample15_CD4TCR[intersected_genes], pseudobulk_sample16_CD4TCR[intersected_genes], pseudobulk_sample17_CD4TCR[intersected_genes], pseudobulk_sample18_CD4TCR[intersected_genes], pseudobulk_sample19_CD4TCR[intersected_genes], pseudobulk_sample20_CD4TCR[intersected_genes], pseudobulk_sample21_CD4TCR[intersected_genes], pseudobulk_sample22_CD4TCR[intersected_genes], pseudobulk_sample23_CD4TCR[intersected_genes]], axis=1)
+=======
+
+pseudobulk_CD4TCR = pd.concat([pseudobulk_sample1_CD4TCR[intersected_genes], pseudobulk_sample2_CD4TCR[intersected_genes], pseudobulk_sample3_CD4TCR[intersected_genes], pseudobulk_sample4_CD4TCR[intersected_genes], pseudobulk_sample5_CD4TCR[intersected_genes], pseudobulk_sample6_CD4TCR[intersected_genes], pseudobulk_sample7_CD4TCR[intersected_genes], pseudobulk_sample8_CD4TCR[intersected_genes], pseudobulk_sample9_CD4TCR[intersected_genes], pseudobulk_sample10_CD4TCR[intersected_genes], pseudobulk_sample11_CD4TCR[intersected_genes], pseudobulk_sample12_CD4TCR[intersected_genes], pseudobulk_sample13_CD4TCR[intersected_genes], pseudobulk_sample14_CD4TCR[intersected_genes], pseudobulk_sample15_CD4TCR[intersected_genes], pseudobulk_sample16_CD4TCR[intersected_genes], pseudobulk_sample17_CD4TCR[intersected_genes], pseudobulk_sample18_CD4TCR[intersected_genes], pseudobulk_sample19_CD4TCR[intersected_genes], pseudobulk_sample20_CD4TCR[intersected_genes], pseudobulk_sample21_CD4TCR[intersected_genes], pseudobulk_sample22_CD4TCR[intersected_genes], pseudobulk_sample23_CD4TCR[intersected_genes]], axis=1)
+
+>>>>>>> bb3e26c (Initial commit)
 pseudobulk_CD4T = pd.concat([pseudobulk_sample1_CD4T[intersected_genes], pseudobulk_sample2_CD4T[intersected_genes], pseudobulk_sample3_CD4T[intersected_genes], pseudobulk_sample4_CD4T[intersected_genes], pseudobulk_sample5_CD4T[intersected_genes], pseudobulk_sample6_CD4T[intersected_genes], pseudobulk_sample7_CD4T[intersected_genes], pseudobulk_sample8_CD4T[intersected_genes], pseudobulk_sample9_CD4T[intersected_genes], pseudobulk_sample10_CD4T[intersected_genes], pseudobulk_sample11_CD4T[intersected_genes], pseudobulk_sample12_CD4T[intersected_genes], pseudobulk_sample13_CD4T[intersected_genes], pseudobulk_sample14_CD4T[intersected_genes], pseudobulk_sample15_CD4T[intersected_genes], pseudobulk_sample16_CD4T[intersected_genes], pseudobulk_sample17_CD4T[intersected_genes], pseudobulk_sample18_CD4T[intersected_genes], pseudobulk_sample19_CD4T[intersected_genes], pseudobulk_sample20_CD4T[intersected_genes], pseudobulk_sample21_CD4T[intersected_genes], pseudobulk_sample22_CD4T[intersected_genes], pseudobulk_sample23_CD4T[intersected_genes]], axis=1)
 
 
@@ -462,6 +497,14 @@ sample_metadata['Log2_75th_Quantile'] = (sample_metadata['Log2_75th_Quantile'] -
 # Ensure gene_expression columns are in the same order as sample_metadata rows
 pseudobulk_CD4T_CD4TCR_qc.columns = sample_metadata.index
 
+<<<<<<< HEAD
+=======
+
+pseudobulk_CD4T_CD4TCR_qc.loc["GSTM3"][:23].mean()
+pseudobulk_CD4T_CD4TCR_qc.loc["GSTM3"][23:].mean()
+
+
+>>>>>>> bb3e26c (Initial commit)
 # Activate pandas and R data frame automatic conversion
 pandas2ri.activate()
 
