@@ -4,7 +4,7 @@
 ## Overview
 This project is designed to [project purpose]. It involves a series of steps to achieve [project functionality].
 
-![Overview Image](/Images/WorkFlow.png)
+![Overview Image](/Images/Figure1_WorkFlow.png)
 
 ## Table of Contents
 1. [Data Preparation](#data-preparation)
