@@ -20,13 +20,23 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (with TCR) under the data folder "Wang_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (with TCR) under the data folder "Wang_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Wang et al., 2023 using built PBMC atlas with Cancer Reactive T cells.
 --------------------------------------------------------------------------------
 """
 
 
+<<<<<<< HEAD
 Atlas_final_df = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final.csv')
+=======
+Atlas_final_df = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final_df.csv')
+>>>>>>> bb3e26c (Initial commit)
 Wang = pd.read_csv('/Users/scui2/DNAmethylation/Wang_et_al/Wang_Meth_data_850K.csv')
 
 # Find intersected probes
@@ -45,8 +55,11 @@ Atlas_final_df.reset_index(drop = True, inplace = True)
 X = Atlas_final_df.iloc[:, 3:].iloc[:,].values  # Target matrix
 Y = Wang_atlas.iloc[:, 4:].values.T      # Mixed signal matrix
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bb3e26c (Initial commit)
 def constrained_ls(A, b):
     n = A.shape[1]
     
@@ -87,7 +100,11 @@ nnls_df_Wang = pd.DataFrame(nnls_results_Wang, columns=["CD4+T", "CD4+TCR", "CD8
 nnls_df_Wang *= 100  # Convert to percentage
 
 
+<<<<<<< HEAD
 
+=======
+### Visualization analysis
+>>>>>>> bb3e26c (Initial commit)
 # Add hierarchical labels
 labels_Wang = ['Breast Cancer'] * 50 + ['Normal'] * 30
 nnls_df_Wang['Group'] = labels_Wang
@@ -134,6 +151,10 @@ plt.tight_layout()
 # Display figure
 plt.show()
 
+<<<<<<< HEAD
+=======
+# Save the result
+>>>>>>> bb3e26c (Initial commit)
 nnls_df_Wang_TCR = nnls_df_Wang.copy()
 nnls_df_Wang_TCR.to_csv('/Users/scui2/DNAmethylation/Wang_et_al/nnls_df_Wang_TCR.csv', index = False)
 

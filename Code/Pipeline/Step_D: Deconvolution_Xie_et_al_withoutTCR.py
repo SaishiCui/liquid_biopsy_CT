@@ -18,13 +18,23 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (without TCR) under the data folder "Xie_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (without TCR) under the data folder "Xie_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Xie et al., 2023 without using Cancer Reactive T cells.
 --------------------------------------------------------------------------------
 """
 
 
+<<<<<<< HEAD
 Atlas_final_df = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final.csv')
+=======
+Atlas_final_df = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final_df.csv')
+>>>>>>> bb3e26c (Initial commit)
 Xie = pd.read_csv('/Users/scui2/DNAmethylation/Xie_et_al/Xie_et_al.csv')  ### 728,310
 
 
@@ -91,6 +101,11 @@ nnls_df_Xie *= 100  # Convert to percentage
 labels_Xie = ['Colorectal Cancer'] * 50 + ['Normal'] * 50
 nnls_df_Xie['Group'] = labels_Xie
 
+<<<<<<< HEAD
+=======
+
+### Visualization analysis
+>>>>>>> bb3e26c (Initial commit)
 # Convert data to long format for plotting
 nnls_long_Xie = pd.melt(nnls_df_Xie, id_vars='Group', var_name='Cell Type', value_name='Proportion')
 
@@ -133,7 +148,11 @@ plt.tight_layout()
 # Display figure
 plt.show()
 
+<<<<<<< HEAD
 
+=======
+# Save the result
+>>>>>>> bb3e26c (Initial commit)
 nnls_df_Xie_withoutTCR = nnls_df_Xie.copy()
 nnls_df_Xie_withoutTCR.to_csv('/Users/scui2/DNAmethylation/Xie_et_al/nnls_df_Xie_withoutTCR.csv', index = False)
 

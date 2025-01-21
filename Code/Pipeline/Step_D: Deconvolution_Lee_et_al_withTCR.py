@@ -20,6 +20,12 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (with TCR) under the data folder "Lee_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (with TCR) under the data folder "Lee_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Lee et al., 2024 using built PBMC atlas with Cancer Reactive T cells.
 
@@ -28,6 +34,10 @@ Note:
 --------------------------------------------------------------------------------
 """
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb3e26c (Initial commit)
 Atlas_final_df_withGranu = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final_df_withGranu.csv')
 Lee = pd.read_csv('/Users/scui2/DNAmethylation/Lee_et_al/GSE243529_matrix-processed.tsv', sep = '\t', header = 0)
 
@@ -37,6 +47,10 @@ Lee = Lee.iloc[:, [0] + list(range(1,1049,2))]
 Lee_BC = Lee.iloc[:,[0] + list(range(1,257))]
 Lee_normal = Lee.iloc[:,[0] + list(range(257,525))]
 Lee_clean = pd.concat([Lee_BC, Lee_normal.iloc[:,1:]], axis = 1)
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb3e26c (Initial commit)
 # Keep the first instance of duplicate columns
 Lee_clean = Lee_clean.loc[:, ~Lee_clean.columns.duplicated()]
 Lee_clean.dropna(inplace = True)

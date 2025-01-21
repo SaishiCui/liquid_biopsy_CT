@@ -6,8 +6,11 @@ from matplotlib.colors import LinearSegmentedColormap
 from statsmodels.stats.multitest import multipletests
 import requests
 from statsmodels.nonparametric.smoothers_lowess import lowess
+<<<<<<< HEAD
 import numpy.polynomial.polynomial as poly
 import statsmodels.api as sm
+=======
+>>>>>>> bb3e26c (Initial commit)
 from numpy.polynomial import Polynomial
 from sklearn.metrics import r2_score
 from matplotlib.font_manager import FontProperties
@@ -17,6 +20,7 @@ from matplotlib.font_manager import FontProperties
 --------------------------------------------------------------------------------
 Date last modified: 2025-01-17 by Saishi Cui
 Program: Step_B: LM_filtering_and_Extrapolation_CD8TCR.py
+<<<<<<< HEAD
 Purpose: Filter genes by linear model (R squared >= 0.1) and extrapolate DNA methylation for CD8+TCR signatures.
 --------------------------------------------------------------------------------
 Data Inputs:
@@ -28,6 +32,27 @@ Data Inputs:
 Data Outputs:
 - CD8+TCR signatures filtered by linear model (R squared >= 0.1).
 - Extrapolated DNA methylation for those filtered CD8+TCR signatures.
+=======
+Purpose: Filter genes by linear model (R squared >= 0.2) and extrapolate DNA methylation for CD8+TCR signatures.
+--------------------------------------------------------------------------------
+Data Inputs:
+
+- Potential CD8+TCR signatures obtained from External_scRNAseq_CD8TCR_prepare.py under the Code folder "Data_prepare".
+- Previously identified CD8+TCR signatures obtained from CD8_sigs.txt under the Data folder "Cancer_reactive_T".
+- Negative correlated genes for CD8+T samples obtained from Step_B: Select_Gene_list_B_(CD8T).py under the Code folder "Pipeline". (for both 3 studies combined and study 2)
+- Matched samples of CD8+T RNA-seq and DNAmethylation data obtained from External_CD8T_DNAMeth_data_prepare.py 
+and External_CD8T_RNAseq_data_prepare.py under the Code folder "Data_prepare".
+- The best positive and negative correlated windows with their information (gene location, window location, spearman correlation, spearman p-value)
+from Step_B: Sliding_Window_CD8T.py under the Code folder "Pipeline". (for both 3 studies combined and study 2)
+
+Data Outputs:
+- CD8+TCR signatures filtered by linear model (R squared >= 0.1) with 
+extrapolated DNA methylation change from healthy samples to cancer samples for those 
+filtered CD8+TCR signatures.
+
+Visualization analysis part:
+- Visualize the linear model fitting for some of the filtered CD8+TCR signatures.
+>>>>>>> bb3e26c (Initial commit)
 --------------------------------------------------------------------------------
 """
 
@@ -41,6 +66,7 @@ CD8_sigs = pd.read_csv("/Users/scui2/DNAmethylation/Cancer_reactive_T/CD8_sigs.t
 CD8_sigs.columns = ["Gene_Name", "effect"]
 
 a = set(method_CD8TCR_sigs["Gene_Name"]) & set(CD8_sigs["Gene_Name"])
+<<<<<<< HEAD
 len(a)
 
 b = set(method_CD8TCR_sigs["Gene_Name"]) - a
@@ -49,6 +75,15 @@ method_CD8TCR_sigs_final = pd.concat([method_CD8TCR_sigs[method_CD8TCR_sigs["Gen
 
 
 # Read CD8T negative correlation genes
+=======
+b = set(method_CD8TCR_sigs["Gene_Name"]) - a
+
+# Combine previously identified CD8+TCR signatures and newly identified CD8+TCR signatures
+method_CD8TCR_sigs_final = pd.concat([method_CD8TCR_sigs[method_CD8TCR_sigs["Gene_Name"].isin(b)], CD8_sigs], axis=0)
+
+
+# Query detailed information of signature genes
+>>>>>>> bb3e26c (Initial commit)
 
 def query_geneSymbol(Symbol):
     base_url = "http://www.ensembl.org/biomart/martservice"
@@ -120,7 +155,11 @@ df_CD8T.dropna(inplace=True)
 
 CD8T_filtered_neg = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_filtered_neg.csv')
 
+<<<<<<< HEAD
 
+=======
+# Filter CD8+TCR signatures by negative correlation genes
+>>>>>>> bb3e26c (Initial commit)
 condition1_CD8T = df_CD8T["Ensembl_Gene_ID"].isin(set(CD8T_filtered_neg["Neg_training_gene"]).intersection(set(df_CD8T["Ensembl_Gene_ID"])))
 condition2_CD8T = CD8T_filtered_neg["Neg_training_gene"].isin(set(CD8T_filtered_neg["Neg_training_gene"]).intersection(set(df_CD8T["Ensembl_Gene_ID"])))
 
@@ -184,12 +223,20 @@ CD8T_predicting_Meth = pd.concat([CD8T_predicting_Meth_training, CD8T_predicting
 
 
 
+<<<<<<< HEAD
 # Filter genes by linear model (R squared >= 0.1)
+=======
+# Filter genes by linear model (R squared >= 0.2)
+>>>>>>> bb3e26c (Initial commit)
 
 
 need_to_keep_genes = []
 need_to_keep_genes_index = []
+<<<<<<< HEAD
 for i in range(608):
+=======
+for i in range(CD8T_predicting_RNA_training.shape[0]):
+>>>>>>> bb3e26c (Initial commit)
     Ensembl_Gene_ID = CD8T_predicting_RNA_training.iloc[i, 0]
     gene_name = CD8T_predicting_RNA_training.iloc[i, 1]
     window = CD8T_predicting_RNA_training.iloc[i, 2]
@@ -206,7 +253,11 @@ for i in range(608):
     r_squared_training = r2_score(y_training, p1_training(x_training))
     r_squared_testing = r2_score(y_testing, p1_testing(x_testing))
     
+<<<<<<< HEAD
     if r_squared_training >= 0.1 and r_squared_testing >= 0.1:
+=======
+    if r_squared_training >= 0.2 and r_squared_testing >= 0.2:
+>>>>>>> bb3e26c (Initial commit)
         need_to_keep_genes.append(gene_name)
         need_to_keep_genes_index.append(i)
 
@@ -217,7 +268,11 @@ CD8T_predicting_Meth = CD8T_predicting_Meth.iloc[need_to_keep_genes_index, :].re
 negative_list_CD8TCR = CD8T_predicting_RNA[CD8T_predicting_RNA["effect"] == "negative"]["Gene_Name"].tolist()
 
 
+<<<<<<< HEAD
 # Plotting
+=======
+# Visualize the linear model fitting for some of the filtered CD8+TCR signatures
+>>>>>>> bb3e26c (Initial commit)
 fig, axes = plt.subplots(3, 5, figsize=(15, 9))
 fig.subplots_adjust(hspace=0.3, wspace=0.3)
 
@@ -236,11 +291,18 @@ for i in range(15):
     x_testing = CD8T_predicting_RNA.iloc[i, 16:].astype(float)
     y_testing = CD8T_predicting_Meth.iloc[i, 12:].astype(float)
 
+<<<<<<< HEAD
     # 计算 Spearman 相关系数
     rho_training, p_value_training = spearmanr(x_training, y_training)
     rho_testing, p_value_testing = spearmanr(x_testing, y_testing)
 
     # 多项式拟合
+=======
+    # Calculate Spearman correlation
+    rho_training, p_value_training = spearmanr(x_training, y_training)
+    rho_testing, p_value_testing = spearmanr(x_testing, y_testing)
+
+>>>>>>> bb3e26c (Initial commit)
     p1_training = Polynomial.fit(x_training, y_training, 1)
     p1_testing = Polynomial.fit(x_testing, y_testing, 1)
     x_min_training, x_max_training = np.min(x_training), np.max(x_training)
@@ -254,13 +316,21 @@ for i in range(15):
     r_squared_training = r2_score(y_training, p1_training(x_training))
     r_squared_testing = r2_score(y_testing, p1_testing(x_testing))
 
+<<<<<<< HEAD
     # 计算95% CI
+=======
+    # Calculate 95% CI
+>>>>>>> bb3e26c (Initial commit)
     n_training = len(x_training)
     n_testing = len(x_testing)
     x_mean_training = np.mean(x_training)
     x_mean_testing = np.mean(x_testing)
     
+<<<<<<< HEAD
     # 计算预测值的标准误差
+=======
+    # Calculate standard error of prediction
+>>>>>>> bb3e26c (Initial commit)
     y_pred_training = p1_training(x_training)
     y_pred_testing = p1_testing(x_testing)
     mse_training = np.sum((y_training.values - y_pred_training.values) ** 2) / (n_training - 2)
@@ -268,6 +338,7 @@ for i in range(15):
     std_err_training = np.sqrt(mse_training * (1/n_training + (x_fit_training - x_mean_training)**2 / np.sum((x_training.values - x_mean_training)**2)))
     std_err_testing = np.sqrt(mse_testing * (1/n_testing + (x_fit_testing - x_mean_testing)**2 / np.sum((x_testing.values - x_mean_testing)**2)))
     
+<<<<<<< HEAD
     # 计算95% CI
     ci_training = 1.96 * std_err_training
     ci_testing = 1.96 * std_err_testing
@@ -280,26 +351,54 @@ for i in range(15):
     ax.spines['right'].set_visible(False)
     
     # 绘制散点图和拟合线
+=======
+    # Calculate 95% CI
+    ci_training = 1.96 * std_err_training
+    ci_testing = 1.96 * std_err_testing
+
+    # Plot in the corresponding subplot
+    ax = axes_flat[i]
+
+    # Set the border, only show the left and bottom
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    
+    # Plot the scatter plot and the fitting line
+>>>>>>> bb3e26c (Initial commit)
     ax.scatter(x_training, y_training, color='green', label='CD8+T training', alpha=0.8, s=8)
     ax.scatter(x_testing, y_testing, color='red', label='CD8+T testing', alpha=0.8, s=8)
     ax.plot(x_fit_training, y_fit_training, color='blue', label='Linear fit (training)')
     ax.plot(x_fit_testing, y_fit_testing, color='red', label='Linear fit (testing)')
 
+<<<<<<< HEAD
     # 添加95% CI灰色区域
     ax.fill_between(x_fit_training, y_fit_training - ci_training, y_fit_training + ci_training, color='gray', alpha=0.6, label='95% CI (training)')
     ax.fill_between(x_fit_testing, y_fit_testing - ci_testing, y_fit_testing + ci_testing, color='gray', alpha=0.6, label='95% CI (testing)')
 
     # 添加注释
+=======
+    # Add 95% CI gray area
+    ax.fill_between(x_fit_training, y_fit_training - ci_training, y_fit_training + ci_training, color='gray', alpha=0.6, label='95% CI (training)')
+    ax.fill_between(x_fit_testing, y_fit_testing - ci_testing, y_fit_testing + ci_testing, color='gray', alpha=0.6, label='95% CI (testing)')
+
+    # Add annotation
+>>>>>>> bb3e26c (Initial commit)
     ax.annotate(f'$\\rho$ train = {rho_training:.3f}, $R^2$ train = {r_squared_training:.3f}\n$\\rho$ test = {rho_testing:.3f}, $R^2$ test = {r_squared_testing:.3f}',
                 xy=(0.6, 0.95), xycoords='axes fraction', color='blue',
                 fontsize=6, fontweight='bold', ha='left', va='top')
 
     ax.tick_params(axis='both', which='major', labelsize=6)
+<<<<<<< HEAD
     # 设置标题
     ax.set_title(f'{gene_name}', 
                  fontsize=10, fontweight='bold')
 
     # 只为左下角子图(index=6)添加标签
+=======
+    ax.set_title(f'{gene_name}', 
+                 fontsize=10, fontweight='bold')
+
+>>>>>>> bb3e26c (Initial commit)
     if i != 10:
         ax.set_xlabel('')
         ax.set_ylabel('')
@@ -307,7 +406,10 @@ for i in range(15):
         ax.set_xlabel('Gene expression (RNA-seq, Microarray)', fontsize=8, fontweight='bold')
         ax.set_ylabel('Beta value (Methylation)', fontsize=8, fontweight='bold')
 
+<<<<<<< HEAD
     # 设置图例
+=======
+>>>>>>> bb3e26c (Initial commit)
     if i == 10:
         ax.legend(loc='lower left', prop=font_properties)  
 
@@ -325,6 +427,10 @@ axes_flat[-1].set_visible(False)
 
 
 
+<<<<<<< HEAD
+=======
+# Calculate the percentage change of DNA methylation for the filtered CD8+TCR signatures
+>>>>>>> bb3e26c (Initial commit)
 percentage_change_list_CD8T_10pct = []
 percentage_change_list_CD8T_20pct = []
 for i in range(CD8T_predicting_RNA.shape[0]):
@@ -333,7 +439,10 @@ for i in range(CD8T_predicting_RNA.shape[0]):
     y_training = CD8T_predicting_Meth.iloc[i, :12].astype(float)
     y_testing = CD8T_predicting_Meth.iloc[i, 12:].astype(float)
 
+<<<<<<< HEAD
     # 多项式拟合
+=======
+>>>>>>> bb3e26c (Initial commit)
     p1_training = Polynomial.fit(x_training, y_training, 1)
     p1_testing = Polynomial.fit(x_testing, y_testing, 1)
     x_min_training, x_max_training = np.min(x_training), np.max(x_training)
@@ -405,7 +514,11 @@ CD8T_sigs_change.to_csv('/Users/scui2/DNAmethylation/Cancer_Reactive_T/CD8T_sigs
 
 
 
+<<<<<<< HEAD
 ##### CD8T study 2
+=======
+##### For CD8T study 2
+>>>>>>> bb3e26c (Initial commit)
 
 CD8T_RNA_training_neg_window_study2_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_neg_window_study2_sorted.csv')
 
@@ -455,7 +568,11 @@ CD8T_RNA_new = pd.concat([CD8T_RNA_new.iloc[:,:3], new_sigs_df["effect"], CD8T_R
 
 
 
+<<<<<<< HEAD
 # Plotting
+=======
+# Visualize the linear model fitting for the new CD8+TCR signatures
+>>>>>>> bb3e26c (Initial commit)
 fig, axes = plt.subplots(3, 5, figsize=(15, 10))
 fig.subplots_adjust(hspace=0.3, wspace=0.3)
 
@@ -467,6 +584,7 @@ for i in range(15):
     gene_name = CD8T_RNA_new["Gene_Name"][i]
     window = CD8T_RNA_new["Promoter_window"][i]
     chrom, start, end = window.split('_')
+<<<<<<< HEAD
     x_training = CD8T_RNA_new.iloc[i, 5:17].astype(float)
     y_training = new_sigs_meth.iloc[i, :].astype(float)
 
@@ -474,6 +592,13 @@ for i in range(15):
     rho_training, p_value_training = spearmanr(x_training, y_training)
 
     # 多项式拟合
+=======
+    x_training = CD8T_RNA_new.iloc[i, 4:].astype(float)
+    y_training = new_sigs_meth.iloc[i, :].astype(float)
+
+    rho_training, p_value_training = spearmanr(x_training, y_training)
+
+>>>>>>> bb3e26c (Initial commit)
     p1_training = Polynomial.fit(x_training, y_training, 1)
     x_min_training, x_max_training = np.min(x_training), np.max(x_training)
     x_range_training = x_max_training - x_min_training
@@ -481,15 +606,23 @@ for i in range(15):
     y_fit_training = p1_training(x_fit_training)
     r_squared_training = r2_score(y_training, p1_training(x_training))
 
+<<<<<<< HEAD
     # 计算95% CI
     n_training = len(x_training)
     x_mean_training = np.mean(x_training)
     
     # 计算预测值的标准误差
+=======
+
+    n_training = len(x_training)
+    x_mean_training = np.mean(x_training)
+
+>>>>>>> bb3e26c (Initial commit)
     y_pred_training = p1_training(x_training)
     mse_training = np.sum((y_training.values - y_pred_training.values) ** 2) / (n_training - 2)
     std_err_training = np.sqrt(mse_training * (1/n_training + (x_fit_training - x_mean_training)**2 / np.sum((x_training.values - x_mean_training)**2)))
     
+<<<<<<< HEAD
     # 计算95% CI
     ci_training = 1.96 * std_err_training
 
@@ -508,16 +641,42 @@ for i in range(15):
     ax.fill_between(x_fit_training, y_fit_training - ci_training, y_fit_training + ci_training, color='gray', alpha=0.6, label='95% CI (training)')
 
     # 添加注释
+=======
+
+    ci_training = 1.96 * std_err_training
+
+    ax = axes_flat[i]
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    
+ 
+    ax.scatter(x_training, y_training, color='green', label='CD8+T training', alpha=0.8, s=8)
+    ax.plot(x_fit_training, y_fit_training, color='blue', label='Linear fit (training)')
+
+  
+    ax.fill_between(x_fit_training, y_fit_training - ci_training, y_fit_training + ci_training, color='gray', alpha=0.6, label='95% CI (training)')
+
+    
+>>>>>>> bb3e26c (Initial commit)
     ax.annotate(f'$\\rho$ train = {rho_training:.3f}\n$R^2$ train = {r_squared_training:.3f}',
                 xy=(0.6, 0.95), xycoords='axes fraction', color='blue',
                 fontsize=6, fontweight='bold', ha='left', va='top')
 
     ax.tick_params(axis='both', which='major', labelsize=6)
+<<<<<<< HEAD
     # 设置标题
     ax.set_title(f'{gene_name}', 
                  fontsize=10, fontweight='bold')
 
     # 只为左下角子图(index=6)添加标签
+=======
+
+    ax.set_title(f'{gene_name}', 
+                 fontsize=10, fontweight='bold')
+
+
+>>>>>>> bb3e26c (Initial commit)
     if i != 10:
         ax.set_xlabel('')
         ax.set_ylabel('')
@@ -525,11 +684,18 @@ for i in range(15):
         ax.set_xlabel('Gene expression (RNA-seq, Microarray)', fontsize=8, fontweight='bold')
         ax.set_ylabel('Beta value (Methylation)', fontsize=8, fontweight='bold')
 
+<<<<<<< HEAD
     # 设置图例
     if i == 10:
         ax.legend(loc='lower left', prop=font_properties)
 
 
+=======
+
+    if i == 10:
+        ax.legend(loc='lower left', prop=font_properties)
+
+>>>>>>> bb3e26c (Initial commit)
 plt.tight_layout()
 plt.show()
 
@@ -597,5 +763,9 @@ CD8T_sigs_change_new.rename(columns={"Percentage_change_new_sigs_10pct":"Percent
 
 CD8T_sigs_change_combined = pd.concat([CD8T_sigs_change, CD8T_sigs_change_new], axis=0, ignore_index=True)
 
+<<<<<<< HEAD
 
+=======
+CD8T_sigs_change_combined["effect"].value_counts()
+>>>>>>> bb3e26c (Initial commit)
 CD8T_sigs_change_combined.to_csv('/Users/scui2/DNAmethylation/Cancer_Reactive_T/CD8T_sigs_change_combined.csv', index=False)

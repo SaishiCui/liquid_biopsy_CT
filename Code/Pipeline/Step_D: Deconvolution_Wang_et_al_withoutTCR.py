@@ -18,6 +18,12 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (without TCR) under the data folder "Wang_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (without TCR) under the data folder "Wang_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Wang et al., 2023 using built PBMC atlas without Cancer Reactive T cells.
 --------------------------------------------------------------------------------
@@ -81,11 +87,18 @@ nnls_df_Wang = pd.DataFrame(nnls_results_Wang, columns=["CD4+T", "CD8+T", "B", "
 nnls_df_Wang *= 100  # Convert to percentage
 
 
+<<<<<<< HEAD
 
 
 labels_Wang = ['Breast Cancer'] * 50 + ['Normal'] * 30
 nnls_df_Wang['Group'] = labels_Wang
 
+=======
+labels_Wang = ['Breast Cancer'] * 50 + ['Normal'] * 30
+nnls_df_Wang['Group'] = labels_Wang
+
+### Visualization analysis
+>>>>>>> bb3e26c (Initial commit)
 # Convert data to long format for plotting
 nnls_long_Wang = pd.melt(nnls_df_Wang, id_vars='Group', var_name='Cell Type', value_name='Proportion')
 
@@ -128,6 +141,10 @@ plt.tight_layout()
 # Display figure
 plt.show()
 
+<<<<<<< HEAD
+=======
+# Save the result
+>>>>>>> bb3e26c (Initial commit)
 nnls_df_Wang_withoutTCR = nnls_df_Wang.copy()
 nnls_df_Wang_withoutTCR.to_csv('/Users/scui2/DNAmethylation/Wang_et_al/nnls_df_Wang_withoutTCR.csv', index = False)
 

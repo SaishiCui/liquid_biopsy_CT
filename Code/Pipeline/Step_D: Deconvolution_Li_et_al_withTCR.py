@@ -20,6 +20,12 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (with TCR) under the data folder "Li_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (with TCR) under the data folder "Li_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Li et al., 2024 using built PBMC atlas with Cancer Reactive T cells.
 --------------------------------------------------------------------------------

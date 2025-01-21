@@ -18,6 +18,12 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (without TCR) under the data folder "Lee_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (without TCR) under the data folder "Lee_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Lee et al., 2024 without using Cancer Reactive T cells.
 

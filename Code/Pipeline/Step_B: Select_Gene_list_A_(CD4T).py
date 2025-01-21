@@ -22,10 +22,21 @@ Data Inputs:
 
 Data Outputs:
 - Gene list A (genes whose gene expression is negatively correlated with DNA methylation) after sliding window.
+<<<<<<< HEAD
 --------------------------------------------------------------------------------
 """
 
 # Write paths to Spearman and Pearson correlation lists
+=======
+
+Analysis part:
+- Visualize the Spearman correlation between training and testing (scatter plot).
+- Visualize the correlation between DNA methylation and RNA-seq for the most extreme window for some genes (scatter plot with cubic fit).
+--------------------------------------------------------------------------------
+"""
+
+# Write paths to Spearman correlation lists
+>>>>>>> bb3e26c (Initial commit)
 
 CD4T_path_spearman_pos_training = '/Users/scui2/DNAmethylation/Corr/CD4T_spearman_corr_pos_list_training.json'
 CD4T_path_spearman_neg_training = '/Users/scui2/DNAmethylation/Corr/CD4T_spearman_corr_neg_list_training.json'
@@ -97,7 +108,11 @@ plt.legend(fontsize=8, prop=font_properties, loc='upper left')
 plt.show()
 
 
+<<<<<<< HEAD
 # Filter genes by correlation threshold +/- 0.2.
+=======
+# Filter genes by correlation threshold +/- 0.3.
+>>>>>>> bb3e26c (Initial commit)
 
 CD4T_filtered_pos = CD4T_corr_df[(CD4T_corr_df['Pos_training_Spearman'] > 0.2) & (CD4T_corr_df['Pos_testing_Spearman'] > 0.2)]
 CD4T_filtered_neg = CD4T_corr_df[(CD4T_corr_df['Neg_training_Spearman'] < -0.2) & (CD4T_corr_df['Neg_testing_Spearman'] < -0.2)]
@@ -113,13 +128,18 @@ CD4T_filtered_neg.to_csv('/Users/scui2/DNAmethylation/Corr/CD4T_filtered_neg.csv
 
 
 
+<<<<<<< HEAD
 # Each gene's correlation for samples (most extreme window)
+=======
+# Visualize the correlation between DNA methylation and RNA-seq for the most extreme window for some genes
+>>>>>>> bb3e26c (Initial commit)
 
 CD4T_Meth_window_training = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD4T_Meth_window_training.csv')
 CD4T_Meth_window_testing = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD4T_Meth_window_testing.csv')
 
 CD4T_RNA_training = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD4T_RNA_training.csv')
 CD4T_RNA_testing = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD4T_RNA_testing.csv')
+<<<<<<< HEAD
 CD4T_RNA_training_pos_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD4T_RNA_training_pos_window.csv')
 CD4T_RNA_training_neg_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD4T_RNA_training_neg_window.csv')
 
@@ -154,12 +174,24 @@ plt.show()
 
 
 # Plot top 20
+=======
+CD4T_RNA_training_pos_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD4T_RNA_training_pos_window_sorted.csv')
+CD4T_RNA_training_neg_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD4T_RNA_training_neg_window_sorted.csv')
+
+
+
+# Plot top 20 negative correlated genes
+>>>>>>> bb3e26c (Initial commit)
 
 
 fig, axes = plt.subplots(4, 5, figsize=(20, 16))
 axes = axes.flatten()  # Flatten the subplot array for iteration
 
+<<<<<<< HEAD
 # 迭代前 20 个 promoter windows
+=======
+
+>>>>>>> bb3e26c (Initial commit)
 for i in range(20):
     neg_window_gene = CD4T_corr_df["Neg_training_gene"][i]
     condition_neg_window_gene = (CD4T_RNA_training["gene_id"] == neg_window_gene)

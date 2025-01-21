@@ -18,13 +18,23 @@ Data Inputs:
 Data Outputs:
 - Deconvolution results (with TCR) under the data folder "Xie_et_al".
 
+<<<<<<< HEAD
+=======
+Visualization analysis:
+- Boxplot of deconvolution results (with TCR) under the data folder "Xie_et_al".
+
+>>>>>>> bb3e26c (Initial commit)
 Functions:
 - constrained_ls(): Deconvolution of Xie et al., 2023 using built PBMC atlas with Cancer Reactive T cells.
 --------------------------------------------------------------------------------
 """
 
 # Read data
+<<<<<<< HEAD
 Atlas_final_df = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final.csv')
+=======
+Atlas_final_df = pd.read_csv('/Users/scui2/DNAmethylation/Atlas/Atlas_final_df.csv')
+>>>>>>> bb3e26c (Initial commit)
 Xie = pd.read_csv('/Users/scui2/DNAmethylation/Xie_et_al/Xie_et_al.csv')  ### 728,310
 
 # Find intersected probes
@@ -87,6 +97,11 @@ nnls_df_Xie = pd.DataFrame(nnls_results_Xie, columns=["CD4+T", "CD4+TCR", "CD8+T
 nnls_df_Xie *= 100  # Convert to percentage
 
 
+<<<<<<< HEAD
+=======
+
+### Visualization analysis (boxplot)
+>>>>>>> bb3e26c (Initial commit)
 # Add stratified labels
 labels_Xie = ['Colorectal Cancer'] * 50 + ['Normal'] * 50
 nnls_df_Xie['Group'] = labels_Xie
@@ -134,7 +149,11 @@ plt.tight_layout()
 # Show the figure
 plt.show()
 
+<<<<<<< HEAD
 
+=======
+# Save the result
+>>>>>>> bb3e26c (Initial commit)
 nnls_df_Xie_TCR = nnls_df_Xie.copy()
 nnls_df_Xie_TCR.to_csv('/Users/scui2/DNAmethylation/Xie_et_al/nnls_df_Xie_TCR.csv', index = False)
 

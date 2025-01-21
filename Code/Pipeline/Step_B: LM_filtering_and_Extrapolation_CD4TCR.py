@@ -15,12 +15,17 @@ from matplotlib.font_manager import FontProperties
 
 """
 --------------------------------------------------------------------------------
+<<<<<<< HEAD
 Date last modified: 2025-01-17 by Saishi Cui
+=======
+Date last modified: 2025-01-19 by Saishi Cui
+>>>>>>> bb3e26c (Initial commit)
 Program: Step_B: LM_filtering_and_Extrapolation_CD4TCR.py
 Purpose: Filter genes by linear model (R squared >= 0.1) and extrapolate DNA methylation for CD4+TCR signatures.
 --------------------------------------------------------------------------------
 Data Inputs:
 
+<<<<<<< HEAD
 - Potential CD4+TCR signatures.
 - Negative correlated genes for CD4+T samples.
 - Matched samples of CD4+T RNA-seq and DNAmethylation data. (Most extreme negative correlated windows)
@@ -28,6 +33,23 @@ Data Inputs:
 Data Outputs:
 - CD4+TCR signatures filtered by linear model (R squared >= 0.1).
 - Extrapolated DNA methylation for those filtered CD4+TCR signatures.
+=======
+- Potential CD4+TCR signatures obtained from External_scRNAseq_CD4TCR_prepare.py under the Code folder "Data_prepare".
+- Previously identified CD4+TCR signatures obtained from CD4_sigs.txt under the Data folder "Cancer_reactive_T".
+- Negative correlated genes for CD4+T samples obtained from Step_B: Select_Gene_list_B_(CD4T).py under the Code folder "Pipeline".
+- Matched samples of CD4+T RNA-seq and DNAmethylation data obtained from External_CD4T_DNAMeth_data_prepare.py 
+and External_CD4T_RNAseq_data_prepare.py under the Code folder "Data_prepare".
+- The best positive and negative correlated windows with their information (gene location, window location, spearman correlation, spearman p-value)
+from Step_B: Sliding_Window_CD4T.py under the Code folder "Pipeline".
+
+Data Outputs:
+- CD4+TCR signatures filtered by linear model (R squared >= 0.1) with 
+extrapolated DNA methylation change from healthy samples to cancer samples for those 
+filtered CD4+TCR signatures.
+
+Visualization analysis part:
+- Visualize the linear model fitting for some of the filtered CD4+TCR signatures.
+>>>>>>> bb3e26c (Initial commit)
 --------------------------------------------------------------------------------
 """
 
@@ -42,8 +64,11 @@ CD4_sigs.columns = ["Gene_Name", "effect"]
 
 # Find intersection between potential CD4+TCR signatures and previously identified CD4+TCR signatures
 a = set(method_CD4TCR_sigs["Gene_Name"]) & set(CD4_sigs["Gene_Name"])
+<<<<<<< HEAD
 len(a)
 
+=======
+>>>>>>> bb3e26c (Initial commit)
 # Find genes in potential CD4+TCR signatures that are not in previously identified CD4+TCR signatures
 b = set(method_CD4TCR_sigs["Gene_Name"]) - a
 
@@ -179,7 +204,11 @@ CD4T_predicting_Meth.reset_index(drop=True, inplace=True)
 
 need_to_keep_genes = []
 need_to_keep_genes_index = []
+<<<<<<< HEAD
 for i in range(257):
+=======
+for i in range(CD4T_predicting_RNA.shape[0]):
+>>>>>>> bb3e26c (Initial commit)
     Ensembl_Gene_ID = CD4T_predicting_RNA.iloc[i, 0]
     gene_name = CD4T_predicting_RNA.iloc[i, 1]
     window = CD4T_predicting_RNA.iloc[i, 2]
@@ -208,7 +237,11 @@ CD4T_predicting_Meth = CD4T_predicting_Meth.iloc[need_to_keep_genes_index, :].re
 negative_list_CD4TCR = CD4T_predicting_RNA[CD4T_predicting_RNA["effect"] == "negative"]["Gene_Name"].tolist()
 
 
+<<<<<<< HEAD
 # Plotting
+=======
+# Visualize the linear model fitting for some of the filtered CD4+TCR signatures
+>>>>>>> bb3e26c (Initial commit)
 fig, axes = plt.subplots(3, 5, figsize=(15, 9))
 fig.subplots_adjust(hspace=0.3, wspace=0.3)
 
@@ -375,9 +408,17 @@ CD4T_predicting_RNA["Percentage_change_50pct"] = percentage_change_list_CD4T_50p
 CD4T_sigs_change = CD4T_predicting_RNA.iloc[:,[0,1,2,3,130,131,132,133]]
 
 
+<<<<<<< HEAD
+=======
+CD4T_sigs_change["effect"].value_counts()
+>>>>>>> bb3e26c (Initial commit)
 CD4T_sigs_change.to_csv('/Users/scui2/DNAmethylation/Cancer_Reactive_T/CD4T_sigs_change.csv', index=False)
 
 
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb3e26c (Initial commit)

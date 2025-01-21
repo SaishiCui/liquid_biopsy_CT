@@ -2,12 +2,17 @@ import pandas as pd
 import numpy as np
 from scipy.stats import spearmanr
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
 import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap
 from statsmodels.stats.multitest import multipletests
 from collections import Counter
 import json
 from matplotlib.font_manager import FontProperties
+=======
+from matplotlib.font_manager import FontProperties
+import json
+>>>>>>> bb3e26c (Initial commit)
 
 
 """
@@ -18,10 +23,22 @@ Purpose: Select gene list B (genes whose gene expression is negatively correlate
 --------------------------------------------------------------------------------
 Data Inputs:
 
+<<<<<<< HEAD
 - Spearman correlation between DNA methylation and RNA-seq in the most extreme negative correlated windows for each gene in both training and testing CD4+T cells samples.
 
 Data Outputs:
 - Gene list B (genes whose gene expression is negatively correlated with DNA methylation) after sliding window.
+=======
+- Spearman correlation between DNA methylation and RNA-seq in the most extreme negative correlated windows for each gene in both training and testing CD8+T cells samples.
+obtained from Step_B: Calculate_Spearman_Correlation_CD8T_training.py and Step_B: Calculate_Spearman_Correlation_CD8T_testing.py under the Code folder "Pipeline".
+
+Data Outputs:
+- Gene list B (genes whose gene expression is negatively correlated with DNA methylation in CD8+T cells) after sliding window.
+
+Analysis (Visualization) part:
+- Visualize the Spearman correlation between training and testing (scatter plot).
+- Visualize the correlation between DNA methylation and RNA-seq for the most extreme window for some genes (scatter plot with cubic fit).
+>>>>>>> bb3e26c (Initial commit)
 --------------------------------------------------------------------------------
 """
 
@@ -34,8 +51,13 @@ CD8T_path_neg_testing = '/Users/scui2/DNAmethylation/Corr/CD8T_spearman_corr_neg
 
 
 # Read Spearman correlation lists
+<<<<<<< HEAD
 CD8T_RNA_training_pos_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_pos_window.csv')
 CD8T_RNA_training_neg_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_neg_window.csv')
+=======
+CD8T_RNA_training_pos_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_pos_window_sorted.csv')
+CD8T_RNA_training_neg_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_neg_window_sorted.csv')
+>>>>>>> bb3e26c (Initial commit)
 
 
 with open(CD8T_path_pos_training, 'r') as f:
@@ -67,7 +89,11 @@ CD8T_corr_df = pd.DataFrame({"Pos_training_gene": CD8T_RNA_training_pos_window_s
 CD8T_corr_df.to_csv('/Users/scui2/DNAmethylation/Corr/CD8T_correlated_genes.csv', index=False)
 
 
+<<<<<<< HEAD
 # Visualize the Spearman correlation between training and testing
+=======
+# Visualize the Spearman correlation between training and testing (scatter plot)
+>>>>>>> bb3e26c (Initial commit)
 x = CD8T_corr_df['Pos_training']
 y = CD8T_corr_df['Pos_testing']
 
@@ -100,10 +126,18 @@ plt.legend(fontsize=8, prop=font_properties, loc='upper left')
 plt.show()
 
 
+<<<<<<< HEAD
 # Filter genes
 
 CD8T_filtered_pos = CD8T_corr_df[(CD8T_corr_df['Pos_training'] > 0.2) & (CD8T_corr_df['Pos_testing'] > 0.2)]
 CD8T_filtered_neg = CD8T_corr_df[(CD8T_corr_df['Neg_training'] < -0.2) & (CD8T_corr_df['Neg_testing'] < -0.2)]
+=======
+# Filter genes by Spearman correlation < -0.4 in both training and testing for negative correlated genes
+# and Spearman correlation > 0.4 in both training and testing for positive correlated genes
+
+CD8T_filtered_pos = CD8T_corr_df[(CD8T_corr_df['Pos_training'] > 0.4) & (CD8T_corr_df['Pos_testing'] > 0.4)]
+CD8T_filtered_neg = CD8T_corr_df[(CD8T_corr_df['Neg_training'] < -0.4) & (CD8T_corr_df['Neg_testing'] < -0.4)]
+>>>>>>> bb3e26c (Initial commit)
 
 CD8T_filtered_pos.reset_index(drop=True, inplace=True)
 CD8T_filtered_neg.reset_index(drop=True, inplace=True)  
@@ -114,13 +148,21 @@ CD8T_filtered_pos.to_csv('/Users/scui2/DNAmethylation/Corr/CD8T_filtered_pos.csv
 CD8T_filtered_neg.to_csv('/Users/scui2/DNAmethylation/Corr/CD8T_filtered_neg.csv', index=False)
 
 
+<<<<<<< HEAD
 # Each gene's correlation for samples (most extreme window)
+=======
+
+
+
+# Visualize the correlation between DNA methylation and RNA-seq for the most extreme window for some genes
+>>>>>>> bb3e26c (Initial commit)
 
 CD8T_Meth_window_training = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD8T_Meth_window_training.csv')
 CD8T_Meth_window_testing = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD8T_Meth_window_testing.csv')
 
 CD8T_RNA_training = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD8T_RNA_training.csv')
 CD8T_RNA_testing = pd.read_csv('/Users/scui2/DNAmethylation/CD4T_CD8T_processed/CD8T_RNA_testing.csv')
+<<<<<<< HEAD
 CD8T_RNA_training_pos_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_pos_window.csv')
 CD8T_RNA_training_neg_window_sorted = pd.read_csv('/Users/scui2/DNAmethylation/Corr/CD8T_RNA_training_neg_window.csv')
 
@@ -153,20 +195,32 @@ plt.title(title)
 plt.legend(loc = "lower right")
 plt.grid(True)
 plt.show()
+=======
+>>>>>>> bb3e26c (Initial commit)
 
 
 
 
+<<<<<<< HEAD
 
 ####### Plot top 20
+=======
+####### Plot top 20 negative correlated genes
+>>>>>>> bb3e26c (Initial commit)
 
 fig, axes = plt.subplots(4, 5, figsize=(20, 16))
 axes = axes.flatten()  
 
+<<<<<<< HEAD
 
 for i in range(20):
     neg_window_gene = CD8T_corr_df["Neg_training_gene"][i]
     condition_neg_window_gene = (CD8T_RNA_training["gene_id"] == neg_window_gene)
+=======
+for i in range(20):
+    neg_window_gene = CD8T_corr_df["Neg_training_gene"][i]
+    condition_neg_window_gene = (CD8T_RNA_training["ENSEMBL"] == neg_window_gene)
+>>>>>>> bb3e26c (Initial commit)
     neg_window_location = CD8T_RNA_training_neg_window_sorted["Promoter_window"][i].split("_")
     condition_neg_window_meth = (
         (CD8T_Meth_window_training["chr"] == neg_window_location[0]) &
@@ -178,8 +232,13 @@ for i in range(20):
         CD8T_Meth_window_testing[condition_neg_window_meth].iloc[:, 4:].mean(axis=0).tolist()
     )
     neg_window_RNA_CD8T = (
+<<<<<<< HEAD
         CD8T_RNA_training[condition_neg_window_gene].iloc[:, 2:].values[0].tolist() +
         CD8T_RNA_testing[condition_neg_window_gene].iloc[:, 2:].values[0].tolist()
+=======
+        CD8T_RNA_training[condition_neg_window_gene].iloc[:, 3:].values[0].tolist() +
+        CD8T_RNA_testing[condition_neg_window_gene].iloc[:, 3:].values[0].tolist()
+>>>>>>> bb3e26c (Initial commit)
     )
 
 
@@ -189,7 +248,11 @@ for i in range(20):
     ax.scatter(neg_window_Meth_CD8T, neg_window_RNA_CD8T, color='green', alpha=1, s=10)
     coeffs_cubic = np.polyfit(neg_window_Meth_CD8T, neg_window_RNA_CD8T, 3)
 
+<<<<<<< HEAD
     # 生成拟合曲线
+=======
+    # Generate the cubic fit curve
+>>>>>>> bb3e26c (Initial commit)
     x_fit = np.linspace(min(neg_window_Meth_CD8T), max(neg_window_Meth_CD8T), 100)
     y_fit_cubic = np.polyval(coeffs_cubic, x_fit)
 
@@ -210,12 +273,21 @@ plt.show()
 
 
 
+<<<<<<< HEAD
+=======
+####### Plot top 20 positive correlated genes
+
+>>>>>>> bb3e26c (Initial commit)
 fig, axes = plt.subplots(4, 5, figsize=(20, 16))
 axes = axes.flatten()  
 
 for i in range(20):
     pos_window_gene = CD8T_corr_df["Pos_training_gene"][i]
+<<<<<<< HEAD
     condition_pos_window_gene = (CD8T_RNA_training["gene_id"] == pos_window_gene)
+=======
+    condition_pos_window_gene = (CD8T_RNA_training["ENSEMBL"] == pos_window_gene)
+>>>>>>> bb3e26c (Initial commit)
     pos_window_location = CD8T_RNA_training_pos_window_sorted["Promoter_window"][i].split("_")
     condition_pos_window_meth = (
         (CD8T_Meth_window_training["chr"] == pos_window_location[0]) &
@@ -227,8 +299,13 @@ for i in range(20):
         CD8T_Meth_window_testing[condition_pos_window_meth].iloc[:, 4:].mean(axis=0).tolist()
     )
     pos_window_RNA_CD8T = (
+<<<<<<< HEAD
         CD8T_RNA_training[condition_pos_window_gene].iloc[:, 2:].values[0].tolist() +
         CD8T_RNA_testing[condition_pos_window_gene].iloc[:, 2:].values[0].tolist()
+=======
+        CD8T_RNA_training[condition_pos_window_gene].iloc[:, 3:].values[0].tolist() +
+        CD8T_RNA_testing[condition_pos_window_gene].iloc[:, 3:].values[0].tolist()
+>>>>>>> bb3e26c (Initial commit)
     )
 
    

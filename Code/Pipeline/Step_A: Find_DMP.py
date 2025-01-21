@@ -12,8 +12,13 @@ Purpose: Find differentially methylated Probes (DMPs) between different cell typ
 --------------------------------------------------------------------------------
 Data Inputs:
 
+<<<<<<< HEAD
 - Pre-processed WGBS PBMC DNAmethylation data.
 - EPIC 850K DNAmethylation data.
+=======
+- Pre-processed WGBS PBMC DNAmethylation data from WGBS_process.py under the folder "Data_prepare".
+- EPIC 850K DNAmethylation data from Xie_et_al.csv under the data folder "Xie_et_al".
+>>>>>>> bb3e26c (Initial commit)
 
 Data Outputs:
 - Differential Methylated Probes (DMPs) between different cell types in WGBS PBMC DNAmethylation data, not filtered, just raw results with difference and p-value.
